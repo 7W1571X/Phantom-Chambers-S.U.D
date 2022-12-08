@@ -282,6 +282,8 @@ void initOptCursor(unsigned short int opts)
 			currentOptCursor = 0;
 		}
 	}
+
+	return;
 }
 
 int main(void)
@@ -295,217 +297,214 @@ int main(void)
 	bool isMenu{ true };
 	while (isMenu) {
 		// MAIN MENU
-		while (currentTab == 0) {
-			initOptCursor(4);
-
+		if (currentTab == 0) {
 			// Tab Title
 			menuMainTitle(padding, 1);
 			setConsoleCursorPos(113 + padding, 6);
 			std::cout << "0.0.2"; // Version
 
-			// Opt. Continue
-			if (currentOptCursor == 0) {
-				setConsoleCursorPos(0, consoleSize[1] - 25);
-				std::cout << selectArrow;
-				menuMainContinue(selectedPadding, consoleSize[1] - 25);
+			while (currentTab == 0) {
+				initOptCursor(4);
 
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					currentTab = 1;
-					break;
+				// Opt. Continue
+				if (currentOptCursor == 0) {
+					setConsoleCursorPos(0, consoleSize[1] - 25);
+					std::cout << selectArrow;
+					menuMainContinue(selectedPadding, consoleSize[1] - 25);
+
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						currentTab = 1;
+						break;
+					}
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 25, 2, 5);
-				clearSpace(34 + (padding - 1), consoleSize[1] - 25, 5, 4);
-				menuMainContinue(padding, consoleSize[1] - 25);
-			}
-
-			// Opt. New Game
-			if (currentOptCursor == 1) {
-				setConsoleCursorPos(0, consoleSize[1] - 20);
-				std::cout << selectArrow;
-				menuMainNewGame(selectedPadding, consoleSize[1] - 20);
-
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					currentTab = 2;
-					break;
+				else {
+					clearSpace(2, consoleSize[1] - 25, 2, 5);
+					clearSpace(34 + (padding - 1), consoleSize[1] - 25, 5, 4);
+					menuMainContinue(padding, consoleSize[1] - 25);
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 20, 2, 5);
-				clearSpace(41 + (padding - 1), consoleSize[1] - 20, 5, 4);
-				menuMainNewGame(padding, consoleSize[1] - 20);
-			}
 
-			// Opt. Settings
-			if (currentOptCursor == 2) {
-				setConsoleCursorPos(0, consoleSize[1] - 15);
-				std::cout << selectArrow;
-				menuMainSettings(selectedPadding, consoleSize[1] - 15);
+				// Opt. New Game
+				if (currentOptCursor == 1) {
+					setConsoleCursorPos(0, consoleSize[1] - 20);
+					std::cout << selectArrow;
+					menuMainNewGame(selectedPadding, consoleSize[1] - 20);
 
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					currentTab = 3;
-					break;
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						currentTab = 2;
+						break;
+					}
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 15, 2, 5);
-				clearSpace(34 + (padding - 1), consoleSize[1] - 15, 5, 4);
-				menuMainSettings(padding, consoleSize[1] - 15);
-			}
-
-			// Opt. Credits
-			if (currentOptCursor == 3) {
-				setConsoleCursorPos(0, consoleSize[1] - 10);
-				std::cout << selectArrow;
-				menuMainCredits(selectedPadding, consoleSize[1] - 10);
-
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					currentTab = 4;
-					break;
+				else {
+					clearSpace(2, consoleSize[1] - 20, 2, 5);
+					clearSpace(41 + (padding - 1), consoleSize[1] - 20, 5, 4);
+					menuMainNewGame(padding, consoleSize[1] - 20);
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 10, 2, 5);
-				clearSpace(30 + (padding - 1), consoleSize[1] - 10, 5, 4);
-				menuMainCredits(padding, consoleSize[1] - 10);
-			}
 
-			// Opt. Exit
-			if (currentOptCursor == 4) {
-				setConsoleCursorPos(0, consoleSize[1] - 5);
-				std::cout << selectArrow;
-				menuMainExit(selectedPadding, consoleSize[1] - 5);
+				// Opt. Settings
+				if (currentOptCursor == 2) {
+					setConsoleCursorPos(0, consoleSize[1] - 15);
+					std::cout << selectArrow;
+					menuMainSettings(selectedPadding, consoleSize[1] - 15);
 
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					currentTab = 99;
-					break;
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						currentTab = 3;
+						break;
+					}
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 5, 2, 5);
-				clearSpace(18 + (padding - 1), consoleSize[1] - 5, 5, 4);
-				menuMainExit(padding, consoleSize[1] - 5);
-			}
+				else {
+					clearSpace(2, consoleSize[1] - 15, 2, 5);
+					clearSpace(34 + (padding - 1), consoleSize[1] - 15, 5, 4);
+					menuMainSettings(padding, consoleSize[1] - 15);
+				}
 
-			Sleep(10);
+				// Opt. Credits
+				if (currentOptCursor == 3) {
+					setConsoleCursorPos(0, consoleSize[1] - 10);
+					std::cout << selectArrow;
+					menuMainCredits(selectedPadding, consoleSize[1] - 10);
+
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						currentTab = 4;
+						break;
+					}
+				}
+				else {
+					clearSpace(2, consoleSize[1] - 10, 2, 5);
+					clearSpace(30 + (padding - 1), consoleSize[1] - 10, 5, 4);
+					menuMainCredits(padding, consoleSize[1] - 10);
+				}
+
+				// Opt. Exit
+				if (currentOptCursor == 4) {
+					setConsoleCursorPos(0, consoleSize[1] - 5);
+					std::cout << selectArrow;
+					menuMainExit(selectedPadding, consoleSize[1] - 5);
+
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						currentTab = 99;
+						break;
+					}
+				}
+				else {
+					clearSpace(2, consoleSize[1] - 5, 2, 5);
+					clearSpace(18 + (padding - 1), consoleSize[1] - 5, 5, 4);
+					menuMainExit(padding, consoleSize[1] - 5);
+				}
+
+				Sleep(10);
+			}
 		}
 
 		// Reset x1
 		currentOptCursor = 0;
 		system("cls");
 
+		// Exit Check
 		if (currentTab == 99) {
 			break;
 		}
 
-		// CONTINUE TAB
-		while (currentTab == 1) {
-
-
-			Sleep(10);
-		}
-
-		// NEW GAME TAB
-		while (currentTab == 2) {
-
-
-			Sleep(10);
+		// CONTINUE && NEW GAME TAB
+		if (currentTab == 1 || currentTab == 2) {
+			isMenu = false;
+			game();
 		}
 
 		// SETTINGS TAB
-		while (currentTab == 3) {
-			initOptCursor(1);
-
+		if (currentTab == 3) {
 			// Tab Title
 			menuMainSettings(padding, 1);
 
-			// Opt. Audio
-			if (currentOptCursor == 0) {
-				setConsoleCursorPos(0, consoleSize[1] - 10);
-				std::cout << selectArrow;
-				menuSettingsAudio(selectedPadding, consoleSize[1] - 10);
+			while (currentTab == 3) {
+				initOptCursor(1);
 
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					const char* selectSubArrow{ "*" };
-					unsigned short int volume{};
-					bool isSubMenu{ true };
+				// Opt. Audio
+				if (currentOptCursor == 0) {
+					setConsoleCursorPos(0, consoleSize[1] - 10);
+					std::cout << selectArrow;
+					menuSettingsAudio(selectedPadding, consoleSize[1] - 10);
 
-					// Sub Title
-					menuAllTabOutline((consoleSize[0] / 2) - 25, (consoleSize[1] / 4), 50, 10);
-					setConsoleCursorPos((consoleSize[0] / 2) - 23, consoleSize[1] / 4);
-					std::cout << "Audio";
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						const char* selectSubArrow{ "*" };
+						unsigned short int volume{};
+						bool isSubMenu{ true };
 
-					// Sub Menu
-					while (isSubMenu) {
-						initOptCursor(1);
+						// Sub Title
+						menuAllTabOutline((consoleSize[0] / 2) - 25, (consoleSize[1] / 4), 50, 10);
+						setConsoleCursorPos((consoleSize[0] / 2) - 23, consoleSize[1] / 4);
+						std::cout << "Audio";
 
-						// Opt. Volume
-						if (currentOptCursor == 0) {
-							setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 2);
-							std::cout << selectSubArrow;
-							std::cout << " Volume";
+						// Sub Menu
+						while (isSubMenu) {
+							initOptCursor(1);
 
-							if (GetAsyncKeyState(VK_RIGHT) & 1 && volume < 99) {
-								volume++;
+							// Opt. Volume
+							if (currentOptCursor == 0) {
+								setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 2);
+								std::cout << selectSubArrow;
+								std::cout << " Volume";
+
+								if (GetAsyncKeyState(VK_RIGHT) & 1 && volume < 99) {
+									volume++;
+								}
+
+								if (GetAsyncKeyState(VK_LEFT) & 1 && volume > 0) {
+									volume--;
+								}
+
+								setConsoleCursorPos((consoleSize[0] / 2) + 22, (consoleSize[1] / 4) + 2);
+								std::cout << volume;
+							}
+							else {
+								setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 2);
+								std::cout << "  Volume";
 							}
 
-							if (GetAsyncKeyState(VK_LEFT) & 1 && volume > 0) {
-								volume--;
+							// Opt. Back
+							if (currentOptCursor == 1) {
+								setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 6);
+								std::cout << selectSubArrow;
+								std::cout << " Back";
+
+								if (GetAsyncKeyState(VK_RETURN) & 1) {
+									clearSpace((consoleSize[0] / 2) - 25, consoleSize[1] / 4, 51, 10);
+									currentOptCursor = 0;
+									break;
+								}
+							}
+							else {
+								setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 6);
+								std::cout << "  Back";
 							}
 
-							setConsoleCursorPos((consoleSize[0] / 2) + 22, (consoleSize[1] / 4) + 2);
-							std::cout << volume;
+							Sleep(10);
 						}
-						else {
-							setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 2);
-							std::cout << "  Volume";
-						}
-
-						// Opt. Back
-						if (currentOptCursor == 1) {
-							setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 6);
-							std::cout << selectSubArrow;
-							std::cout << " Back";
-
-							if (GetAsyncKeyState(VK_RETURN) & 1) {
-								clearSpace((consoleSize[0] / 2) - 25, consoleSize[1] / 4, 51, 10);
-								currentOptCursor = 0;
-								break;
-							}
-						}
-						else {
-							setConsoleCursorPos((consoleSize[0] / 2) - 24, (consoleSize[1] / 4) + 6);
-							std::cout << "  Back";
-						}
-
-						Sleep(10);
 					}
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 10, 2, 5);
-				clearSpace(22 + (padding - 1), consoleSize[1] - 10, 5, 4);
-				menuSettingsAudio(padding, consoleSize[1] - 10);
-			}
-
-			// Opt. Back
-			if (currentOptCursor == 1) {
-				setConsoleCursorPos(0, consoleSize[1] - 5);
-				std::cout << selectArrow;
-				menuAllBack(selectedPadding, consoleSize[1] - 5);
-
-				if (GetAsyncKeyState(VK_RETURN) & 1) {
-					currentTab = 0;
+				else {
+					clearSpace(2, consoleSize[1] - 10, 2, 5);
+					clearSpace(22 + (padding - 1), consoleSize[1] - 10, 5, 4);
+					menuSettingsAudio(padding, consoleSize[1] - 10);
 				}
-			}
-			else {
-				clearSpace(2, consoleSize[1] - 5, 2, 5);
-				clearSpace(20 + (padding - 1), consoleSize[1] - 5, 5, 4);
-				menuAllBack(padding, consoleSize[1] - 5);
-			}
 
-			Sleep(10);
+				// Opt. Back
+				if (currentOptCursor == 1) {
+					setConsoleCursorPos(0, consoleSize[1] - 5);
+					std::cout << selectArrow;
+					menuAllBack(selectedPadding, consoleSize[1] - 5);
+
+					if (GetAsyncKeyState(VK_RETURN) & 1) {
+						currentTab = 0;
+					}
+				}
+				else {
+					clearSpace(2, consoleSize[1] - 5, 2, 5);
+					clearSpace(20 + (padding - 1), consoleSize[1] - 5, 5, 4);
+					menuAllBack(padding, consoleSize[1] - 5);
+				}
+
+				Sleep(10);
+			}
 		}
 
 		/* CREDIST TAB */
