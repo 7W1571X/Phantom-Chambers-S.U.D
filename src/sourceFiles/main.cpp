@@ -1,209 +1,158 @@
 #include "../headerFiles/stdafx.h"
 
-/* PRINTS */
-short int currentFrame{};
+/* ASCII ART */
 
 // Title
 void menuMainTitle(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << "__________.__                   __                   _________ .__                  ___.                        ";
-		break;
-	case 1:
-		std::cout << "\\______   \\  |__ _____    _____/  |_  ____   _____   \\_   ___ \\|  |__ _____    _____\\_ |__   ___________  ______";
-		break;
-	case 2:
-		std::cout << " |     ___/  |  \\\\__  \\  /    \\   __\\/  _ \\ /     \\  /    \\  \\/|  |  \\\\__  \\  /     \\| __ \\_/ __ \\_  __ \\/  ___/";
-		break;
-	case 3:
-		std::cout << " |    |   |   Y  \\/ __ \\|   |  \\  | (  <_> )  Y Y  \\ \\     \\___|   Y  \\/ __ \\|  Y Y  \\ \\_\\ \\  ___/|  | \\/\\___ \\ ";
-		break;
-	case 4:
-		std::cout << " |____|   |___|  (____  /___|  /__|  \\____/|__|_|  /  \\______  /___|  (____  /__|_|  /___  /\\___  >__|  /____  >";
-		break;
-	case 5:
-		std::cout << "               \\/     \\/     \\/                  \\/          \\/     \\/     \\/      \\/    \\/     \\/           \\/ ";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
+	std::array<std::string, 6> textTitle{
+		R"(__________.__                   __                   _________ .__                  ___.                        )",
+		R"(\______   \  |__ _____    _____/  |_  ____   _____   \_   ___ \|  |__ _____    _____\_ |__   ___________  ______)",
+		R"( |     ___/  |  \\__  \  /    \   __\/  _ \ /     \  /    \  \/|  |  \\__  \  /     \| __ \_/ __ \_  __ \/  ___/)",
+		R"( |    |   |   Y  \/ __ \|   |  \  | (  <_> )  Y Y  \ \     \___|   Y  \/ __ \|  Y Y  \ \_\ \  ___/|  | \/\___ \ )",
+		R"( |____|   |___|  (____  /___|  /__|  \____/|__|_|  /  \______  /___|  (____  /__|_|  /___  /\___  >__|  /____  >)",
+		R"(               \/     \/     \/                  \/          \/     \/     \/      \/    \/     \/           \/ )"
+	};
+	
+	for (int i{}; i < textTitle.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textTitle[i];
 	}
 
-	currentFrame++;
-	return menuMainTitle(x, y);
+	return;
 }
 
 // Continue
 void menuMainContinue(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____         _   _             ";
-		break;
-	case 1:
-		std::cout << "|     |___ ___| |_|_|___ _ _ ___ ";
-		break;
-	case 2:
-		std::cout << "|   --| . |   |  _| |   | | | -_|";
-		break;
-	case 3:
-		std::cout << "|_____|___|_|_|_| |_|_|_|___|___|";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
+	std::array<std::string, 4> textContinue{
+		" _____         _   _             ",
+		"|     |___ ___| |_|_|___ _ _ ___ ",
+		"|   --| . |   |  _| |   | | | -_|",
+		"|_____|___|_|_|_| |_|_|_|___|___|"
+	};
+	
+	for (int i{}; i < textContinue.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textContinue[i];
 	}
-
-	currentFrame++;
-	return menuMainContinue(x, y);
+	
+	return;
 }
 
 // New Game
 void menuMainNewGame(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____              _____               ";
-		break;
-	case 1:
-		std::cout << "|   | |___ _ _ _   |   __|___ _____ ___ ";
-		break;
-	case 2:
-		std::cout << "| | | | -_| | | |  |  |  | .'|     | -_|";
-		break;
-	case 3:
-		std::cout << "|_|___|___|_____|  |_____|__,|_|_|_|___|";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
+	std::array<std::string, 4> textNewGame{
+		" _____              _____               ",
+		"|   | |___ _ _ _   |   __|___ _____ ___ ",
+		"| | | | -_| | | |  |  |  | .'|     | -_|",
+		"|_|___|___|_____|  |_____|__,|_|_|_|___|"
+	};
+	
+	for (int i{}; i < textNewGame.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textNewGame[i];
 	}
-
-	currentFrame++;
-	return menuMainNewGame(x, y);
+	
+	return;
 }
 
 // Settings
 void menuMainSettings(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____     _   _   _             ";
-		break;
-	case 1:
-		std::cout << "|   __|___| |_| |_|_|___ ___ ___ ";
-		break;
-	case 2:
-		std::cout << "|__   | -_|  _|  _| |   | . |_ -|";
-		break;
-	case 3:
-		std::cout << "|_____|___|_| |_| |_|_|_|_  |___|";
-		break;
-	case 4:
-		std::cout << "                        |___|    ";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
-	}
+	std::array<std::string, 5> textSettings{
+		" _____     _   _   _             ",
+		"|   __|___| |_| |_|_|___ ___ ___ ",
+		"|__   | -_|  _|  _| |   | . |_ -|",
+		"|_____|___|_| |_| |_|_|_|_  |___|",
+		"                        |___|    "
+	};
 
-	currentFrame++;
-	return menuMainSettings(x, y);
+	for (int i{}; i < textSettings.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textSettings[i];
+	}
+	
+	return;
 }
 
 // Credits
 void menuMainCredits(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____           _ _ _       ";
-		break;
-	case 1:
-		std::cout << "|     |___ ___ _| |_| |_ ___ ";
-		break;
-	case 2:
-		std::cout << "|   --|  _| -_| . | |  _|_ -|";
-		break;
-	case 3:
-		std::cout << "|_____|_| |___|___|_|_| |___|";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
+	std::array<std::string, 4> textCredits{
+		" _____           _ _ _       ",
+		"|     |___ ___ _| |_| |_ ___ ",
+		"|   --|  _| -_| . | |  _|_ -|",
+		"|_____|_| |___|___|_|_| |___|"
+	};
+
+	for (int i{}; i < textCredits.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textCredits[i];
 	}
 
-	currentFrame++;
-	return menuMainCredits(x, y);
+	return;
 }
 
 // Exit
 void menuMainExit(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____     _ _   ";
-		break;
-	case 1:
-		std::cout << "|   __|_ _|_| |_ ";
-		break;
-	case 2:
-		std::cout << "|   __|_'_| |  _|";
-		break;
-	case 3:
-		std::cout << "|_____|_,_|_|_|  ";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
+	std::array<std::string, 4> textExit{
+		" _____     _ _   ",
+		"|   __|_ _|_| |_ ",
+		"|   __|_'_| |  _|",
+		"|_____|_,_|_|_|  "
+	};
+	
+	for (int i{}; i < textExit.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textExit[i];
 	}
 
-	currentFrame++;
-	return menuMainExit(x, y);
+	return;
 }
 
 // Back
 void menuAllBack(short int x, short int y)
 {
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____         _   ";
-		break;
-	case 1:
-		std::cout << "| __  |___ ___| |_ ";
-		break;
-	case 2:
-		std::cout << "| __ -| .'|  _| '_|";
-		break;
-	case 3:
-		std::cout << "|_____|__,|___|_,_|";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
+	std::array<std::string, 4> textBack{
+		" _____         _   ",
+		"| __  |___ ___| |_ ",
+		"| __ -| .'|  _| '_|",
+		"|_____|__,|___|_,_|"
+	};
+
+	for (int i{}; i < textBack.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textBack[i];
 	}
 
-	currentFrame++;
-	return menuAllBack(x, y);
+	return;
+}
+
+// Audio
+void menuSettingsAudio(short int x, short int y)
+{
+	std::array<std::string, 4> textAudio{
+		" _____       _ _     ",
+		"|  _  |_ _ _| |_|___ ",
+		"|     | | | . | | . |",
+		"|__|__|___|___|_|___|"
+	};
+
+	for (int i{}; i < textAudio.size(); i++) {
+		setConsoleCursorPos(x, y + i);
+		std::cout << textAudio[i];
+	}
+
+	return;
 }
 
 // Tab Outline
 void menuAllTabOutline(short int x, short int y, int width, int height)
 {
+	int count{};
 	setConsoleCursorPos(x + 1, y);
 	// Top
 	for (int t{}; t < width - 1; t++) {
@@ -212,8 +161,8 @@ void menuAllTabOutline(short int x, short int y, int width, int height)
 
 	// Middle
 	for (int m{}; m < height - 3; m++) {
-		currentFrame++;
-		setConsoleCursorPos(x, y + currentFrame);
+		count++;
+		setConsoleCursorPos(x, y + count);
 		std::cout << "|";
 
 		for (int m{}; m < width - 1; m++) {
@@ -224,38 +173,11 @@ void menuAllTabOutline(short int x, short int y, int width, int height)
 	}
 
 	// Bottom
-	setConsoleCursorPos(x, y + currentFrame);
+	setConsoleCursorPos(x, y + count);
 	std::cout << "|";
 	for (int b{}; b < width - 1; b++) {
 		std::cout << "_";
 	}
-}
-
-// Audio
-void menuSettingsAudio(short int x, short int y)
-{
-	setConsoleCursorPos(x, y + currentFrame);
-	switch (currentFrame) {
-	case 0:
-		std::cout << " _____       _ _     ";
-		break;
-	case 1:
-		std::cout << "|  _  |_ _ _| |_|___ ";
-		break;
-	case 2:
-		std::cout << "|     | | | . | | . |";
-		break;
-	case 3:
-		std::cout << "|__|__|___|___|_|___|";
-		break;
-	default:
-		currentFrame = 0;
-		return;
-		break;
-	}
-
-	currentFrame++;
-	return menuSettingsAudio(x, y);
 }
 
 /* MAIN */
@@ -407,7 +329,7 @@ int main(void)
 		// CONTINUE && NEW GAME TAB
 		if (currentTab == 1 || currentTab == 2) {
 			isMenu = false;
-			game();
+			startGame();
 		}
 
 		// SETTINGS TAB
@@ -507,7 +429,7 @@ int main(void)
 			}
 		}
 
-		/* CREDIST TAB */
+		/* CREDITS TAB */
 		if (currentTab == 4) {
 			// Tab Title
 			menuMainCredits(padding, 1);
@@ -547,4 +469,4 @@ int main(void)
 	return 0;
 }
 
-// PS: Always Sleep In While Loops, To Avoid CPU Usage 
+// PS: Always Sleep In While Loops, To Avoid CPU Usage
