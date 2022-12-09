@@ -3,9 +3,9 @@
 /* ASCII ART */
 
 // Title
-void menuMainTitle(short int x, short int y)
+void menuMainTitle(const short x, const short y)
 {
-	std::array<std::string, 6> textTitle{
+	const std::array<std::string, 6> textTitle{
 		R"(__________.__                   __                   _________ .__                  ___.                        )",
 		R"(\______   \  |__ _____    _____/  |_  ____   _____   \_   ___ \|  |__ _____    _____\_ |__   ___________  ______)",
 		R"( |     ___/  |  \\__  \  /    \   __\/  _ \ /     \  /    \  \/|  |  \\__  \  /     \| __ \_/ __ \_  __ \/  ___/)",
@@ -23,9 +23,9 @@ void menuMainTitle(short int x, short int y)
 }
 
 // Continue
-void menuMainContinue(short int x, short int y)
+void menuMainContinue(const short x, const short y)
 {
-	std::array<std::string, 4> textContinue{
+	const std::array<std::string, 4> textContinue{
 		" _____         _   _             ",
 		"|     |___ ___| |_|_|___ _ _ ___ ",
 		"|   --| . |   |  _| |   | | | -_|",
@@ -41,9 +41,9 @@ void menuMainContinue(short int x, short int y)
 }
 
 // New Game
-void menuMainNewGame(short int x, short int y)
+void menuMainNewGame(const short x, const short y)
 {
-	std::array<std::string, 4> textNewGame{
+	const std::array<std::string, 4> textNewGame{
 		" _____              _____               ",
 		"|   | |___ _ _ _   |   __|___ _____ ___ ",
 		"| | | | -_| | | |  |  |  | .'|     | -_|",
@@ -59,9 +59,9 @@ void menuMainNewGame(short int x, short int y)
 }
 
 // Settings
-void menuMainSettings(short int x, short int y)
+void menuMainSettings(const short x, const short y)
 {
-	std::array<std::string, 5> textSettings{
+	const std::array<std::string, 5> textSettings{
 		" _____     _   _   _             ",
 		"|   __|___| |_| |_|_|___ ___ ___ ",
 		"|__   | -_|  _|  _| |   | . |_ -|",
@@ -78,9 +78,9 @@ void menuMainSettings(short int x, short int y)
 }
 
 // Credits
-void menuMainCredits(short int x, short int y)
+void menuMainCredits(const short x, const short y)
 {
-	std::array<std::string, 4> textCredits{
+	const std::array<std::string, 4> textCredits{
 		" _____           _ _ _       ",
 		"|     |___ ___ _| |_| |_ ___ ",
 		"|   --|  _| -_| . | |  _|_ -|",
@@ -96,9 +96,9 @@ void menuMainCredits(short int x, short int y)
 }
 
 // Exit
-void menuMainExit(short int x, short int y)
+void menuMainExit(const short x, const short y)
 {
-	std::array<std::string, 4> textExit{
+	const std::array<std::string, 4> textExit{
 		" _____     _ _   ",
 		"|   __|_ _|_| |_ ",
 		"|   __|_'_| |  _|",
@@ -114,9 +114,9 @@ void menuMainExit(short int x, short int y)
 }
 
 // Back
-void menuAllBack(short int x, short int y)
+void menuAllBack(const short x, const short y)
 {
-	std::array<std::string, 4> textBack{
+	const std::array<std::string, 4> textBack{
 		" _____         _   ",
 		"| __  |___ ___| |_ ",
 		"| __ -| .'|  _| '_|",
@@ -132,9 +132,9 @@ void menuAllBack(short int x, short int y)
 }
 
 // Audio
-void menuSettingsAudio(short int x, short int y)
+void menuSettingsAudio(const short x, const short y)
 {
-	std::array<std::string, 4> textAudio{
+	const std::array<std::string, 4> textAudio{
 		" _____       _ _     ",
 		"|  _  |_ _ _| |_|___ ",
 		"|     | | | . | | . |",
@@ -150,7 +150,7 @@ void menuSettingsAudio(short int x, short int y)
 }
 
 // Tab Outline
-void menuAllTabOutline(short int x, short int y, int width, int height)
+void menuAllTabOutline(const short x, const short y, const int width, const int height)
 {
 	int count{};
 	setConsoleCursorPos(x + 1, y);
@@ -182,11 +182,11 @@ void menuAllTabOutline(short int x, short int y, int width, int height)
 
 /* MAIN */
 Audio audioManager;
-unsigned short int currentTab{}, currentOptCursor{};
+unsigned short currentTab{}, currentOptCursor{};
 const std::array<int, 2> consoleSize{ getConsoleSize() };
 
 // Init Opt Cursor (different from console cursor)
-void initOptCursor(unsigned short int opts)
+void initOptCursor(const short opts)
 {
 	viewConsoleCursor(false);
 	if (upInputPressed) {
@@ -213,8 +213,8 @@ int main(void)
 	audioManager.BasePath = "resources//sounds";
 
 	// Styles
-	const unsigned short int padding{ 4 }, selectedPadding{ 6 };
-	const char* selectArrow{ "      \n      \n  --> \n      \n      " };
+	constexpr unsigned short padding{ 4 }, selectedPadding{ 6 };
+	const auto selectArrow{ "      \n      \n  --> \n      \n      " };
 
 	bool isMenu{ true };
 	while (isMenu) {
@@ -347,7 +347,7 @@ int main(void)
 					menuSettingsAudio(selectedPadding, consoleSize[1] - 10);
 
 					if (GetAsyncKeyState(VK_RETURN) & 1) {
-						const char* selectSubArrow{ "*" };
+						const auto selectSubArrow{ "*" };
 						unsigned short int volume{};
 						bool isSubMenu{ true };
 
