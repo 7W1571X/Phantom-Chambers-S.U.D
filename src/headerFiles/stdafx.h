@@ -22,15 +22,15 @@ std::array<int, 2> getConsoleSize(void)
 	CONSOLE_SCREEN_BUFFER_INFO conInfo;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &conInfo);
 
-	std::array<int, 2> vec2{ conInfo.srWindow.Right - conInfo.srWindow.Left + 1, conInfo.srWindow.Bottom - conInfo.srWindow.Top + 1 };
+	const std::array<int, 2> vec2{ conInfo.srWindow.Right - conInfo.srWindow.Left + 1, conInfo.srWindow.Bottom - conInfo.srWindow.Top + 1 };
 	return vec2;
 }
 
 inline // Set Visibility Of Console Cursor
-void viewConsoleCursor(bool showFlag)
+void viewConsoleCursor(const bool showFlag)
 {
 	// Console Obj's
-	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+	const HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursorInfo;
 
 	GetConsoleCursorInfo(out, &cursorInfo);
@@ -42,18 +42,18 @@ void viewConsoleCursor(bool showFlag)
 }
 
 inline // Sets Console Cursor Position
-void setConsoleCursorPos(short int x, short int y)
+void setConsoleCursorPos(const short x, const short y)
 {
 	// Console Obj's
-	COORD pos{ x, y };
-	HANDLE output{ GetStdHandle(STD_OUTPUT_HANDLE) };
+	const COORD pos{ x, y };
+	const HANDLE output{ GetStdHandle(STD_OUTPUT_HANDLE) };
 
 	SetConsoleCursorPosition(output, pos);
 	return;
 }
 
-inline // Emptys Desenated Space In Console
-void clearSpace(short int x, short int y, int width, int length)
+inline // Empty's Designated Space In Console
+void clearSpace(const short x, const short y, const int width, const int length)
 {
 	// Length
 	for (int l{}; l < length; l++) {
@@ -68,3 +68,4 @@ void clearSpace(short int x, short int y, int width, int length)
 
 /* FILES */
 #include "audio.hpp"
+#include "game.hpp"
