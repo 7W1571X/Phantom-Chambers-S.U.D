@@ -16,7 +16,7 @@ Audio::Audio()
         cout << hr;
 }
 
-int Audio::Play(string path, float volume, bool ShouldLoop) {
+int Audio::Play(string path, const float volume, const bool ShouldLoop) {
     path = BasePath + "\\" + path;
     WAVEFORMATEXTENSIBLE wfx = { 0 };
     XAUDIO2_BUFFER buffer = { 0 };
@@ -24,25 +24,25 @@ int Audio::Play(string path, float volume, bool ShouldLoop) {
 #ifdef _XBOX
     char* strFileName = path;
 #else
-    TCHAR* strFileName = new TCHAR[path.size() + 1];
+    auto* strFileName = new TCHAR[path.size() + 1];
     strFileName[path.size()] = 0;
     std::copy(path.begin(), path.end(), strFileName);
 #endif
 
     // Open the file
-    HANDLE hFile = CreateFile(
+    const HANDLE hFile = CreateFile(
         strFileName,
         GENERIC_READ,
         FILE_SHARE_READ,
-        NULL,
+		nullptr,
         OPEN_EXISTING,
         0,
-        NULL);
+        nullptr);
 
     if (INVALID_HANDLE_VALUE == hFile)
         return HRESULT_FROM_WIN32(GetLastError());
 
-    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, 0, NULL, FILE_BEGIN))
+    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, 0, nullptr, FILE_BEGIN))
         return HRESULT_FROM_WIN32(GetLastError());
 
     DWORD dwChunkSize;
@@ -57,7 +57,7 @@ int Audio::Play(string path, float volume, bool ShouldLoop) {
     FindChunk(hFile, fourccFMT, dwChunkSize, dwChunkPosition);
     ReadChunkData(hFile, &wfx, dwChunkSize, dwChunkPosition);
     FindChunk(hFile, fourccDATA, dwChunkSize, dwChunkPosition);
-    BYTE* pDataBuffer = new BYTE[dwChunkSize];
+    auto* pDataBuffer = new BYTE[dwChunkSize];
     ReadChunkData(hFile, pDataBuffer, dwChunkSize, dwChunkPosition);
 
     buffer.AudioBytes = dwChunkSize;  // size of the audio buffer in bytes
@@ -81,25 +81,24 @@ int Audio::Play(string path, float volume, bool ShouldLoop) {
     return 0;
 }
 
-HRESULT Audio::FindChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& dwChunkDataPosition)
+HRESULT Audio::FindChunk(const HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& dwChunkDataPosition)
 {
     HRESULT hr = S_OK;
-    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, 0, NULL, FILE_BEGIN))
+    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, 0, nullptr, FILE_BEGIN))
         return HRESULT_FROM_WIN32(GetLastError());
 
     DWORD dwChunkType;
     DWORD dwChunkDataSize;
     DWORD dwRIFFDataSize = 0;
     DWORD dwFileType;
-    DWORD bytesRead = 0;
     DWORD dwOffset = 0;
 
     while (hr == S_OK) {
         DWORD dwRead;
-        if (0 == ReadFile(hFile, &dwChunkType, sizeof(DWORD), &dwRead, NULL))
+        if (0 == ReadFile(hFile, &dwChunkType, sizeof(DWORD), &dwRead, nullptr))
             hr = HRESULT_FROM_WIN32(GetLastError());
 
-        if (0 == ReadFile(hFile, &dwChunkDataSize, sizeof(DWORD), &dwRead, NULL))
+        if (0 == ReadFile(hFile, &dwChunkDataSize, sizeof(DWORD), &dwRead, nullptr))
             hr = HRESULT_FROM_WIN32(GetLastError());
 
         switch (dwChunkType) {
@@ -107,12 +106,12 @@ HRESULT Audio::FindChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& 
             dwRIFFDataSize = dwChunkDataSize;
             dwChunkDataSize = 4;
 
-            if (0 == ReadFile(hFile, &dwFileType, sizeof(DWORD), &dwRead, NULL))
+            if (0 == ReadFile(hFile, &dwFileType, sizeof(DWORD), &dwRead, nullptr))
                 hr = HRESULT_FROM_WIN32(GetLastError());
             break;
 
         default:
-            if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, dwChunkDataSize, NULL, FILE_CURRENT))
+            if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, dwChunkDataSize, nullptr, FILE_CURRENT))
                 return HRESULT_FROM_WIN32(GetLastError());
         }
 
@@ -125,7 +124,7 @@ HRESULT Audio::FindChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& 
         }
 
         dwOffset += dwChunkDataSize;
-        if (bytesRead >= dwRIFFDataSize)
+        if (constexpr DWORD bytesRead = 0; bytesRead >= dwRIFFDataSize)
             return S_FALSE;
 
     }
@@ -134,14 +133,14 @@ HRESULT Audio::FindChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& 
 
 }
 
-HRESULT Audio::ReadChunkData(HANDLE hFile, void* buffer, DWORD buffersize, DWORD bufferoffset)
+HRESULT Audio::ReadChunkData(const HANDLE hFile, void* buffer, DWORD buffersize, DWORD bufferoffset)
 {
     HRESULT hr = S_OK;
-    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, bufferoffset, NULL, FILE_BEGIN))
+    if (INVALID_SET_FILE_POINTER == SetFilePointer(hFile, bufferoffset, nullptr, FILE_BEGIN))
         return HRESULT_FROM_WIN32(GetLastError());
 
     DWORD dwRead;
-    if (0 == ReadFile(hFile, buffer, buffersize, &dwRead, NULL))
+    if (0 == ReadFile(hFile, buffer, buffersize, &dwRead, nullptr))
         hr = HRESULT_FROM_WIN32(GetLastError());
 
     return hr;
